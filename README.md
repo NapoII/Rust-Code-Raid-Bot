@@ -4,6 +4,6 @@
 
 [<img src="https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/7add7fdaa7de17a007b11f6926d74e22aee25f1c/README/rust-code-raid-bot--sourcecode.py.svg?token=AVAVQWUY4HLVR322JHYPR6TBUY3O2" height="70px" />](https://github.com/NapoII/Rust-Code-Raid-Bot/blob/main/SourceCode/Rust-Code-Raid-Bot.py)
 
-[<img src="https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README/Zulassen%20Gif.gif" />](https://github.com/NapoII/Rust-Code-Raid-Bot/raw/main/Rust%20-%20Key-Bot.rar)
+[<img src="https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README/Zulassen%20Gif.gif" />](https://github.com/NapoII/Rust-Code-Raid-Bot/raw/main/Rust-Code-Raid-Bot.rar)
 
 
