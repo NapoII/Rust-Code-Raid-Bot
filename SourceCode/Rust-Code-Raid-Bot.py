@@ -1,7 +1,7 @@
 ####################################################################################################
 # #   Intro
 
-v = "1.0.0"
+v = "1.0.2"
 f0 = """                   .,+%####%+,.                   
                 .:#MMMMMMMMMMM@%,                 
                :@MMMMMMMMMMMMMMMM#:               
@@ -120,14 +120,13 @@ def Raid_cheack(Raid_List):
         
         Es wurden folgende gespeicherten CodeLock Raids gefunden:\n """+ str(Raid_List), title='Raid Öffnen' , default='CodeLock-Raid-1')
 
-        
-    Code_Start = int(pyautogui.prompt(text='Code Raid Start an Stelle: (1-10000)', title='Code Start Position' , default='1'))-1
-
     if Raid_Name in Raid_List:
-        return Raid_Name, Code_Start, False
+        return Raid_Name, 0, 10000, False
     else:
+        Code_Start = int(pyautogui.prompt(text='Code Raid Start an Stelle: (1-10000)', title='Code Start Position' , default='1'))
+        Code_Ende = int(pyautogui.prompt(text='Code Raid Ende an Stelle: (2-10000)', title='Code Start Position' , default='10000'))
         x_Raid_Folder = Folder_gen( Raid_Name, "Documents/Rust - Key-Bot/Raid-List" )   # Main Folder erstellen
-        return Raid_Name, Code_Start, True
+        return Raid_Name, Code_Start, Code_Ende, True
 
 def Erstelle_TextDatei( Text_File_name, save_path, Inhalt ):
     complete_Path_Text = os.path.join(save_path+"\\"+Text_File_name+".txt")     # Path + text datei name
@@ -196,24 +195,35 @@ def Next_Code(Code_path):
     w.close()
     return Next_Code
 
-def Code_List(Code_Start, Full_Code_List_dir, Raid_Rest_CodeList_dir):
-    x = Code_Start
-    x = 10000 - x
-    y = 0
-    z = x
+def Code_List(Code_Start, Code_Ende, Full_Code_List_dir, Raid_Rest_CodeList_dir):
+
+    Code_Start = Code_Start - 1
+    Max = 10000
+    Länge = Code_Ende - Code_Start
+
+    Code_Start_pos = (Max - Code_Start)
+    Code_Ende_pos = (Max - Code_Ende)
+
+    with open(Full_Code_List_dir) as f:
+        data = f.readlines()[ Code_Ende_pos : Code_Start_pos ]
+    data.reverse()
+
+    data_len = len(data)
+
+
+
+
+    x = data_len + 1
 
     while True:
         x = x - 1
-        y = y + 1
-        if x == -1 :
+        prozent = round(100-((100/data_len)*x),2)
+        print (str(prozent)+ "%")
+        if x == 0:
+            print("\nDie CodeLock Liste wurde erstellt >>> ["+str(Raid_Rest_CodeList_dir) + "] <<<" )
             break
-        with open(Full_Code_List_dir) as f:
-            data = f.readlines()[x]
-            print(str(int(100/int(z)*y))+" %")
-        
-        Fill_Text_datei(Raid_Rest_CodeList_dir, data, "a")
-
-    print("fertig!\n")
+        Item = data.pop()
+        Fill_Text_datei(Raid_Rest_CodeList_dir, Item, "a")
 
 def Caps_Lock_off():
     caps_status = 0
@@ -248,10 +258,9 @@ def Chat(Eingabe):
 #Pre Set  Programm
 
 file_path = os.path.dirname(sys.argv[0])
-Full_Code_List_dir = file_path + "/Work_Folder/Full Code List 10000.txt"
+Full_Code_List_dir = file_path + "/Full Code List 10000.txt"
 
 Main_Folder = Folder_gen( "Rust - Key-Bot","Documents" )   # Main Folder erstellen
-Work_Folder = file_path + "/Work_Folder"
 Raid_List_Folder = Folder_gen( "Raid-List","Documents/Rust - Key-Bot" )   # Raid Folder erstellen
 
 print(f0)
@@ -260,23 +269,21 @@ Raid_List = Raid_List(Raid_List_Folder)
 Raid_config = Raid_cheack(Raid_List)
 Raid_Name = Raid_config[0]
 Code_Start = (Raid_config[1])
-Raid_New = Raid_config[2]
+Code_Ende = (Raid_config[2])
+Raid_New = Raid_config[3]
 Raid_Folder = Raid_List_Folder + "/" + Raid_Name
+Code_Listen_länge = (Code_Ende+1)-Code_Start
 
 if Raid_New == True:
     datei_Date = Date_Time=(time.strftime("%d_%m-%Y-%H:%M"))
     Raid_log_dir = Erstelle_TextDatei( Raid_Name , Raid_Folder, f0 )
-    f1 = "\n Der CodeLock Raid ["+Raid_Name +"] wurde erstellt am "+ str(datei_Date)+"\nEs werden "+str(10000-Code_Start)+" von 10000 Code Möglichkeiten abgefragt./nDie Code Liste startet ab Code Nr ["+str(Code_Start)+"]\n\n ############################################################\n\nEingegebene Codes (STRG + F Um nach einem Code zu suchen):\n\n"
+    f1 = "\n Der CodeLock Raid ["+Raid_Name +"] wurde erstellt am "+ str(datei_Date)+"\nEs werden "+str(Code_Listen_länge)+" von 10000 Code Möglichkeiten abgefragt./nDie Code Liste startet ab Code Nr ["+str(Code_Start)+" bis "+str(Code_Ende+1) +"]\n\n ############################################################\n\nEingegebene Codes (STRG + F Um nach einem Code zu suchen):\n\n"
     Fill_Text_datei(Raid_log_dir, f1, "a")
+    Raid_Rest_CodeList_dir = Erstelle_TextDatei( "Code List" , Raid_Folder,"" )
+    Code_List(Code_Start, Code_Ende, Full_Code_List_dir, Raid_Rest_CodeList_dir)
+
 else:
     Raid_log_dir = os.path.join(Raid_Folder+"\\"+Raid_Name+".txt")     # Path + text datei name
-
-Raid_Rest_CodeList_dir = Erstelle_TextDatei( "Code List" , Raid_Folder,"" )
-
-
-
-if Raid_New == True:
-    Code_List(Code_Start, Full_Code_List_dir, Raid_Rest_CodeList_dir)
 
 pyautogui.alert("Stelle den In Game-Chat mit [Enter] und dann [TAB] auf Teamchat um.")
 ###################################
@@ -284,39 +291,49 @@ pyautogui.alert("Stelle den In Game-Chat mit [Enter] und dann [TAB] auf Teamchat
 ####################################################################################################
 #Main Programm
 hotkey = pyautogui.prompt(text="Ändere bei bedraf den HOTKEY zum CodeLock zu öffnen.", title='HotKey Einstellung' , default='alt + E')
-pyautogui.alert("Schaue gewünschten KeyLOOK an und Drücke ["+str(hotkey)+"] um den Code Automatsich einzugeben")
+pyautogui.alert("Öffne nun in Game einen Code Lock und Drücke ["+str(hotkey)+"] um den Code Automatsich einzugeben!")
+print("Öffne nun in Game einen Code Lock und Drücke ["+str(hotkey)+"] um den Code Automatsich einzugeben!")
 
 Caps_Lock_off()
 
 start_time_Z = time.time()+1
+
 Z = 1
 while True:
+
     if keyboard.is_pressed(hotkey):
         Caps_Lock_off()
         
         Rust = that_window_pos("Rust")
-        try:
-            Pin = Next_Code(Raid_Rest_CodeList_dir)
+        if Rust == False:
+            continue
+        else :
+
+            try:
+                Pin = Next_Code(Raid_Rest_CodeList_dir)
+                Caps_Lock_off()
+            except:
+                break
+
+            with open(Raid_Rest_CodeList_dir) as myfile:
+                total_lines = sum(1 for line in myfile)
+                Z = Z + 1
+                current_time_Z = time.time()
+                elapsed_time_Z = ((current_time_Z - start_time_Z)/60)       # berechung Zeit
+                Restlänge = Code_Listen_länge-total_lines
+                Prozent = (100/Code_Listen_länge)*Restlänge
+                Prozent = round(Prozent, 2)
+
+                Pin_pro_min = (Z/elapsed_time_Z)
+                Time_for_10k = round((((1/Pin_pro_min)*total_lines))/60,2)
+                Pin_pro_min = round(Pin_pro_min,3)
             Caps_Lock_off()
-        except:
-            break
-
-        with open(Raid_Rest_CodeList_dir) as myfile:
-            total_lines = sum(1 for line in myfile)
-            Z = Z + 1
-            current_time_Z = time.time()
-            elapsed_time_Z = ((current_time_Z - start_time_Z)/60)       # berechung Zeit
-
-            Pin_pro_min = (Z/elapsed_time_Z)
-            Time_for_10k = round((((1/Pin_pro_min)*total_lines))/60,2)
-            Pin_pro_min = round(Pin_pro_min,3)
-        Caps_Lock_off()
-        Chat_Text = ">>"+Pin+"<< Noch "+str(total_lines)+" Pins. (Pin/min) : "+str(Pin_pro_min) + " Rest Zeit für Alle Pins (h) : "+str(Time_for_10k)
-        print("\n"+Chat_Text)
-        Eingabe(Pin)
-        #Zeit_pause(0.7)
-        Chat(Chat_Text)
-        Fill_Text_datei(Raid_log_dir, Chat_Text+"\n", "a")
+            Chat_Text = ">>" + str(Pin) + "<< | [" + str(Code_Listen_länge-1 - total_lines) + "/" +str(Code_Listen_länge-1) +   "]Pins | [" + str(Pin_pro_min) + "]Pin/min | Zeit bis 100% : ["+str(Time_for_10k) + "]h | Fortschritt : [" + str(Prozent)+"/100]%"
+            print("\n"+Chat_Text)
+            Eingabe(Pin)
+            #Zeit_pause(0.7)
+            Chat(Chat_Text)
+            Fill_Text_datei(Raid_log_dir, Chat_Text+"\n", "a")
 
         Zeit_pause(0.5)
 
