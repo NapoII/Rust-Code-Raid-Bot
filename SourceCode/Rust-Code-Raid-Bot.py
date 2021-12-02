@@ -1,7 +1,7 @@
 ####################################################################################################
 # #   Intro
 
-v = "1.0.2"
+v = "1.0.3"
 f0 = """                   .,+%####%+,.                   
                 .:#MMMMMMMMMMM@%,                 
                :@MMMMMMMMMMMMMMMM#:               
@@ -102,29 +102,44 @@ def Raid_List(Raid_Folder):     # Schaut nach Base ornder
     Raid_List_Len = len(Raid_List)
     if Raid_List_Len == 0 :
         print("Es wurden keine gespeicherten Code-Lock-Raids gefunden. Starten sie einen Neuen!\n")
-        return False
+        return Raid_List , False
     else:
         print ("\nEs wurden folgende gespeicherten CodeLock Raids gefunden:\n >>> "+ str(Raid_List)+"\n")
-    return Raid_List
+    return Raid_List, True
 
-def Raid_cheack(Raid_List):
-    if Raid_List == False:
+def List_to_Text (List):
+    List_2 = List.copy()
+    List_2.sort(reverse=True)
+    List_2_text =""
+    List_2_len = len(List)
+    x = List_2_len + 1
+    while True:
+        x = x - 1
+        if x == 0 :
+            break
+        Item = List_2.pop()
+        List_2_text = List_2_text + " » " + str(Item)+"\n"
+    return List_2_text
+
+def Raid_cheack(Raid_List, Raid_List_Text):
+    if Raid_List[1] == False:
         #Raid_Name = input("Wie soll dein Raid heißen: \n>>> ")
         Raid_Name = pyautogui.prompt(text='Wie soll dein Raid heißen?', title='Neuen Raid Erstellen' , default='CodeLock-Raid-1')
-
-        #Raid_Name = Raid_Name.replace(" ", "")
-        Raid_List = []
+    
     else:
         #Raid_Name = input("Gebe gespeicherten Code Lock Raid Namen ein oder einen Namen für einen Neuen Code-Lock Raid: \n >>> " )
         Raid_Name = pyautogui.prompt(text="""Öffne einen Vorhandenen Raid oder erstelle einen neuen.
         
-        Es wurden folgende gespeicherten CodeLock Raids gefunden:\n """+ str(Raid_List), title='Raid Öffnen' , default='CodeLock-Raid-1')
+        Es wurden folgende gespeicherten CodeLock Raids gefunden:\n\n """+ str(Raid_List_Text), title='Raid Öffnen' , default='CodeLock-Raid-1')
 
-    if Raid_Name in Raid_List:
+    print("Es wurde Folgender Raid geöffnet/erstellt: >>> [" +str(Raid_Name)+"] <<<\n")
+    if Raid_Name in Raid_List[0]:
         return Raid_Name, 0, 10000, False
     else:
         Code_Start = int(pyautogui.prompt(text='Code Raid Start an Stelle: (1-10000)', title='Code Start Position' , default='1'))
+        print("Code Liste startet an Stelle: " + str(Code_Start))
         Code_Ende = int(pyautogui.prompt(text='Code Raid Ende an Stelle: (2-10000)', title='Code Start Position' , default='10000'))
+        print("Code Liste endet an Stelle: " + str(Code_Ende))
         x_Raid_Folder = Folder_gen( Raid_Name, "Documents/Rust - Key-Bot/Raid-List" )   # Main Folder erstellen
         return Raid_Name, Code_Start, Code_Ende, True
 
@@ -158,6 +173,7 @@ def that_window_pos(window_name):
         except:
             print (" Das Fenster >>> "+str(window_name)+" <<< konnte nicht gefunden werden")
             window_rect = False
+            print("Der HOTKEY: ["+str(hotkey)+"] Funktioniert nur im Game Rust.")
             pyautogui.alert("Der HOTKEY: ["+str(hotkey)+"] Funktioniert nur im Game Rust.")
             break
 
@@ -206,23 +222,19 @@ def Code_List(Code_Start, Code_Ende, Full_Code_List_dir, Raid_Rest_CodeList_dir)
 
     with open(Full_Code_List_dir) as f:
         data = f.readlines()[ Code_Ende_pos : Code_Start_pos ]
-    data.reverse()
 
+    data.reverse()
     data_len = len(data)
 
-
-
-
     x = data_len + 1
-
     while True:
         x = x - 1
         prozent = round(100-((100/data_len)*x),2)
-        print (str(prozent)+ "%")
         if x == 0:
-            print("\nDie CodeLock Liste wurde erstellt >>> ["+str(Raid_Rest_CodeList_dir) + "] <<<" )
+            print("\nDie CodeLock Liste wurde erstellt >>> ["+str(Raid_Rest_CodeList_dir) + "] <<<\n" )
             break
         Item = data.pop()
+        print (str(prozent)+ "% - [" +str(Item[0:4])+"]")
         Fill_Text_datei(Raid_Rest_CodeList_dir, Item, "a")
 
 def Caps_Lock_off():
@@ -266,7 +278,10 @@ Raid_List_Folder = Folder_gen( "Raid-List","Documents/Rust - Key-Bot" )   # Raid
 print(f0)
 Raid_List = Raid_List(Raid_List_Folder)
 
-Raid_config = Raid_cheack(Raid_List)
+List_for_text = Raid_List[0]
+Raid_List_Text = List_to_Text (List_for_text)
+
+Raid_config = Raid_cheack(Raid_List, Raid_List_Text)
 Raid_Name = Raid_config[0]
 Code_Start = (Raid_config[1])
 Code_Ende = (Raid_config[2])
@@ -285,14 +300,18 @@ if Raid_New == True:
 else:
     Raid_log_dir = os.path.join(Raid_Folder+"\\"+Raid_Name+".txt")     # Path + text datei name
 
+hotkey = pyautogui.prompt(text="Ändere bei bedraf den HOTKEY um den CodeLock zu öffnen.", title='HotKey Einstellung' , default='alt + E')
+print ("Der HotKey um in Rust den Code einzugeben liegt auf ["+str(hotkey)+"]\n")
+
+print("Stelle den In Game-Chat mit [Enter] und dann [TAB] auf Teamchat um.\n")
 pyautogui.alert("Stelle den In Game-Chat mit [Enter] und dann [TAB] auf Teamchat um.")
+print("Öffne nun in Game einen Code Lock und Drücke [" +(hotkey) + "] um den Code Automatsich einzugeben!")
+pyautogui.alert("Öffne nun in Game einen Code Lock und Drücke ["+str(hotkey)+"] um den Code Automatsich einzugeben!")
+
 ###################################
 
 ####################################################################################################
 #Main Programm
-hotkey = pyautogui.prompt(text="Ändere bei bedraf den HOTKEY zum CodeLock zu öffnen.", title='HotKey Einstellung' , default='alt + E')
-pyautogui.alert("Öffne nun in Game einen Code Lock und Drücke ["+str(hotkey)+"] um den Code Automatsich einzugeben!")
-print("Öffne nun in Game einen Code Lock und Drücke ["+str(hotkey)+"] um den Code Automatsich einzugeben!")
 
 Caps_Lock_off()
 
@@ -340,6 +359,7 @@ while True:
         time.sleep(0.05)
     time.sleep(0.01)
 
+print("Es wurden alle Pins Eingegeben")
 pyautogui.alert("Es wurden alle Pins Eingegeben")
 
 ####################################################################################################
