@@ -1,9 +1,6 @@
 [<img src="https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README/bannerf.png" height="500px" />](https://github.com/NapoII/Rust-Code-Raid-Bot/raw/main/Rust-Code-Raid-Bot.rar)
 
 <p align="center">
-<a href="https://github.com/NapoII/Rust-Code-Raid-Bot/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/github/downloads/NapoII/Rust-Code-Raid-Bot/total" alt="downloads/total">
-</a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/archive/refs/heads/main.zip">
     <img src="https://img.shields.io/github/repo-size/NapoII/Rust-Code-Raid-Bot" alt="github/repo-size">
@@ -30,12 +27,16 @@
 </a>
 </p>
 
+## Index
 
-[<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" height="30px" />](https://github.com/NapoII/Rust-Code-Raid-Bot/raw/main/Rust-Code-Raid-Bot.rar) : The code was not written with ChatGPT. The code appears to be a Python script that uses the Brute-Force method to automate the process of entering codes (or "pins") into the game Rust in order to raid a base. The script is intended to be used on a specific target base, and requires the user to have a list of possible codes in a file located at a specific directory.
-The script uses various Python modules such as keyboard, time, and pyautogui to simulate keystrokes, calculate statistics, and send chat messages within the game. Once activated by a specific hotkey, the script continuously checks if the Rust game window is open and attempts to retrieve the next code from the file. If successful, the script enters the code into the game and calculates various statistics such as the remaining number of codes, codes entered per minute, estimated time remaining to enter all codes, and percentage of codes completed. The script then formats a chat message containing this information and sends it in the game chat.
+- [Index](#index)
+- [Introduction 🚀](#introduction-)
+- [Usage 📋](#usage-)
+- [Statistics 📊](#statistics-)
+- [Important Notes 🚨](#important-notes-)
+- [Credits 🙌](#credits-)
+- [Lizenz](#lizenz)
 
-The purpose of this script is to automate a repetitive and time-consuming task in Rust, allowing the user to enter codes more efficiently and accurately in order to raid a target base. As this method involves trying every possible code combination, it is known as a Brute-Force method. It should be noted that using such methods in online games can be a violation of the game's terms of service and may result in consequences such as a ban or suspension of the user's account.
-## Running Locally
 
 This application requires Python 3.10.7.
 ```
@@ -44,8 +45,49 @@ pip install -r requirements.txt
 run Code Rust-Code-Raid-Bot.py
 ```
 
-## Example
-coming soon...
+## Introduction 🚀
+
+This Python script is designed to assist Rust players in opening code-locked doors. It generates a random 4-digit code based on IT security research's top sequence of codes when the player presses the hotkey "Alt + E." Please note that this script does not automatically open doors but simplifies the process of determining the correct code.
+
+## Usage 📋
+
+1. Make sure you have Python 3.x installed on your system.
+
+2. Run the script in the background while playing Rust.
+
+3. In Rust, open a Codelocker you wish to open.
+
+4. Press the hotkey "Alt + E." 🕹️
+
+5. The script will calculate and input the next suitable code based on research data.
+
+
+## Statistics 📊
+
+The script provides real-time statistics in the team chat to keep you informed about your progress:
+
+- Current Code: >>1234<<
+- Number of Attempts: [0/9999]Pins
+- Pins per Minute: [6.037]Pin/min
+- Estimated Time to 100%: [27.6] hours ⏳
+- Progress: [0.01/100]%
+
+## Important Notes 🚨
+
+- This script does not guarantee success in opening code-locked doors, as it relies on random code generation based on research data.
+
+- Be cautious not to use this script for cheating or exploiting the game's mechanics, as it may violate Rust's terms of service and result in consequences. 🚫
+
+- Use this script responsibly and enjoy playing Rust with added convenience. 😊
+
+## Credits 🙌
+
+This script was developed by Napo_II for educational and entertainment purposes. It is not affiliated with Rust or its developers.
+
+Please use this script responsibly and in accordance with the game's rules and policies.
+
+Happy gaming! 🎮✨
+
 ## Lizenz
 
 MIT License
@@ -70,3 +112,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE
 </small>
+<p align="center">
+<img src="https://raw.githubusercontent.com/NapoII/NapoII/233630a814f7979f575c7f764dbf1f4804b05332/Bottom.svg" alt="Github Stats" />
+</p>

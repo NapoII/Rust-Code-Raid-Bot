@@ -1,0 +1,10 @@
+ Raid_lo:
+
+ Der CodeLock Raid [dfdfsefrgerdg] wurde erstellt am 02_10-2023-16:17
+Es werden 10000 von 10000 Code Möglichkeiten abgefragt./nDie Code Liste startet ab Code Nr [1 bis 10001]
+
+ ############################################################
+
+Eingegebene Codes (STRG + F Um nach einem Code zu suchen):
+
+>>1234<< | [0/9999]Pins | [6.037]Pin/min | Zeit bis 100% : [27.6]h | Fortschritt : [0.01/100]%
