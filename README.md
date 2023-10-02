@@ -1,4 +1,4 @@
-[<img src="https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README/bannerf.png" height="500px" />](https://github.com/NapoII/Rust-Code-Raid-Bot/raw/main/Rust-Code-Raid-Bot.rar)
+[<img src="[https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README/bannerf.png](https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README_img/Readme_top.png)" height="500px" />]
 
 <p align="center">
 
