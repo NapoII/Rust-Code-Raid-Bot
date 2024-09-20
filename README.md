@@ -1,31 +1,33 @@
-![Readme_top.png](https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README_img/Readme_top.png)
+![Rust Code Raid Bot](https://raw.githubusercontent.com/NapoII/Rust-Code-Raid-Bot/main/README_img/Readme_top.png)
 
 <p align="center">
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/github/repo-size/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/repo-size">
+    <img src="https://img.shields.io/github/repo-size/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="Repository Size">
 </a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/license">
+    <img src="https://img.shields.io/github/license/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="License">
 </a>
 
-<a href="https://github.com/NapoII/Rust-Code-Raid-Bot/actions">
-    <img src="https://img.shields.io/github/last-commit/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/last-commit">
+<a href="https://github.com/NapoII/Rust-Code-Raid-Bot/commits/main">
+    <img src="https://img.shields.io/github/last-commit/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="Last Commit">
 </a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/issues">
-    <img src="https://img.shields.io/github/issues/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/issues">
+    <img src="https://img.shields.io/github/issues/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="Issues">
 </a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/stargazers">
-    <img src="https://img.shields.io/github/stars/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/stars">
+    <img src="https://img.shields.io/github/stars/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="Stars">
 </a>
 
-<a href="https://discord.gg/g7EW4P65">
-    <img src="https://img.shields.io/discord/190307701169979393?style=for-the-badge" alt="discord">
+<a href="https://discord.gg/Gd23KJ76Tq">
+    <img src="https://img.shields.io/discord/1152254593850417234?style=for-the-badge" alt="Join our Discord">
 </a>
+
 </p>
+
 
 ## Index
 
