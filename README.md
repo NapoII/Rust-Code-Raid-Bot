@@ -42,7 +42,7 @@ This application requires Python 3.10.7.
 ```
 git clone https://github.com/NapoII/Rust-Code-Raid-Bot
 pip install -r requirements.txt
-run Code Rust-Code-Raid-Bot.py
+pyhton Rust-Code-Raid-Bot.py
 ```
 
 ## Introduction 🚀
@@ -88,30 +88,19 @@ Please use this script responsibly and in accordance with the game's rules and p
 
 Happy gaming! 🎮✨
 
-## Lizenz
+## ☕ Buy me a coffee <a name = "coffee"></a>
 
-MIT License
+Feel free to show your appreciation by treating me to a virtual coffee. Your support means a lot and keeps the creative coding vibes going! 🚀
 
-Copyright (c) 2023 NapoII
-<small><small><small>
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+<div style="text-align:center;">
+    <a href="https://ko-fi.com/napo_ii"><img src="README_img/kofi.gif" alt="Buy me a coffee" width="200" height="auto"></a>
+</div>
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 📚 LICENSE <a name = "LICENSE"></a>
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE
-</small>
+[GNU GENERAL PUBLIC LICENSE Version 3](LICENSE)
+
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/NapoII/NapoII/233630a814f7979f575c7f764dbf1f4804b05332/Bottom.svg" alt="Github Stats" />
 </p>
