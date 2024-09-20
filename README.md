@@ -2,10 +2,6 @@
 
 <p align="center">
 
-<a href="https://github.com/NapoII/Rust-Code-Raid-Bot/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/github/repo-size/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="Repository Size">
-</a>
-
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="License">
 </a>
