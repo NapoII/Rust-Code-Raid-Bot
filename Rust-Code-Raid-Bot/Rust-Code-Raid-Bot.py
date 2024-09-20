@@ -1,129 +1,128 @@
-"""Full Doku on: https://github.com/NapoII/Rust-Code-Raid-Bot"
------------------------------------------------
-!!! ADD MUST HAVE INFO !!
-------------------------------------------------
+"""
+Full Documentation available at: https://github.com/NapoII/Rust-Code-Raid-Bot
+------------------------------------------------------
+!!! ADD NECESSARY INFORMATION HERE !!!
+------------------------------------------------------
 """
 
-# import
-
+# Imports
 import os
 import sys
-
-from util.__funktion__ import *
+import time
 import keyboard
+import pyautogui
+from util.__funktion__ import *
+import logNow
 
-# pre Var
-
+# Predefined Variables
 file_path = os.path.normpath(os.path.dirname(sys.argv[0]))
-config_dir = file_path + os.path.sep + "cfg" + os.path.sep + "config.ini"
+config_dir = os.path.join(file_path, "cfg", "config.ini")
 config_dir = new_path(config_dir)
 BSP_config = read_config(config_dir, "Test", "abc")
 
-
-# Main
+# Main Script
 # Rust-Code-Raid-Bot.py
 
-# Pre Set  Programm
-
+# Setup Program Paths
 file_path = os.path.dirname(os.path.abspath(__file__))
-Full_Code_List_dir = new_path(file_path, "util", "Full_Code_List_10000.txt")
-# Main Folder erstellen
-Main_Folder = Folder_gen("Rust - Key-Bot", "Documents")
-Raid_List_Folder = Folder_gen(
-    "Raid-List", "Documents/Rust - Key-Bot")   # Raid Folder erstellen
+full_code_list_path = new_path(file_path, "util", "Full_Code_List_10000.txt")
 
-Raid_List = Raid_List(Raid_List_Folder)
+# Create Main Folder
+main_folder = Folder_gen("Rust - Key-Bot", "Documents")
+raid_list_folder = Folder_gen("Raid-List", "Documents/Rust - Key-Bot")  # Create Raid folder
 
-List_for_text = Raid_List[0]
-Raid_List_Text = List_to_Text(List_for_text)
+raid_list = Raid_List(raid_list_folder)
+list_for_text = raid_list[0]
+raid_list_text = List_to_Text(list_for_text)
 
-Raid_config = Raid_cheack(Raid_List, Raid_List_Text)
-Raid_Name = Raid_config[0]
-Code_Start = (Raid_config[1])
-Code_Ende = (Raid_config[2])
-Raid_New = Raid_config[3]
-Raid_Folder = Raid_List_Folder + "/" + Raid_Name
-Code_Listen_länge = (Code_Ende+1)-Code_Start
+# Get Raid Configuration
+raid_config = Raid_cheack(raid_list, raid_list_text)
+raid_name = raid_config[0]
+code_start = raid_config[1]
+code_end = raid_config[2]
+is_new_raid = raid_config[3]
+raid_folder = os.path.join(raid_list_folder, raid_name)
+code_list_length = (code_end + 1) - code_start
 
-if Raid_New == True:
-    datei_Date = Date_Time = (time.strftime("%d_%m-%Y-%H:%M"))
-
-    Raid_log_dir = Create_File(f"{Raid_Name}.txt", Raid_Folder, " Raid_lo:\n")
-    f1 = "\n Der CodeLock Raid ["+Raid_Name + "] wurde erstellt am " + str(datei_Date)+"\nEs werden "+str(Code_Listen_länge)+" von 10000 Code Möglichkeiten abgefragt./nDie Code Liste startet ab Code Nr ["+str(
-        Code_Start)+" bis "+str(Code_Ende+1) + "]\n\n ############################################################\n\nEingegebene Codes (STRG + F Um nach einem Code zu suchen):\n\n"
-    Fill_Text_datei(Raid_log_dir, f1, "a")
-    Raid_Rest_CodeList_dir = Create_File("Code_List.txt", Raid_Folder, "")
-    Code_List(Code_Start, Code_Ende, Full_Code_List_dir,
-              Raid_Rest_CodeList_dir)
-
+# If new raid, create log and initialize code list
+if is_new_raid:
+    date_time = time.strftime("%d_%m-%Y-%H:%M")
+    raid_log_path = Create_File(f"{raid_name}.txt", raid_folder, " Raid Log:\n")
+    
+    log_intro = (
+        f"\nThe CodeLock Raid [{raid_name}] was created on {date_time}.\n"
+        f"{code_list_length} out of 10,000 possible codes will be checked.\n"
+        f"The code list starts at code number [{code_start}] and ends at [{code_end + 1}].\n\n"
+        "############################################################\n\n"
+        "Entered codes (use CTRL + F to search for a code):\n\n"
+    )
+    
+    Fill_Text_datei(raid_log_path, log_intro, "a")
+    
+    raid_code_list_path = Create_File("Code_List.txt", raid_folder, "")
+    Code_List(code_start, code_end, full_code_list_path, raid_code_list_path)
 else:
-    Raid_log_dir = new_path(Raid_Folder, f"{Raid_Name}.txt")
+    raid_log_path = new_path(raid_folder, f"{raid_name}.txt")
 
-hotkey = pyautogui.prompt(text="Ändere bei bedraf den HOTKEY um den CodeLock zu öffnen.",
-                          title='HotKey Einstellung', default='alt + E')
-print(
-    "Der HotKey um in Rust den Code einzugeben liegt auf ["+str(hotkey)+"]\n")
+# Set Hotkey
+hotkey = pyautogui.prompt(
+    text="Modify the HOTKEY to open the CodeLock if necessary.",
+    title='HotKey Settings',
+    default='alt + E'
+)
+print(f"The hotkey to enter the code in Rust is set to [{hotkey}].\n")
 
-print("Stelle den In Game-Chat mit [Enter] und dann [TAB] auf Teamchat um.\n")
-pyautogui.alert(
-    "Stelle den In Game-Chat mit [Enter] und dann [TAB] auf Teamchat um.")
-print("Öffne nun in Game einen Code Lock und Drücke [" + (
-    hotkey) + "] um den Code Automatsich einzugeben!")
-pyautogui.alert("Öffne nun in Game einen Code Lock und Drücke ["+str(
-    hotkey)+"] um den Code Automatsich einzugeben!")
+# Game Instructions
+print("Switch the in-game chat to Team Chat by pressing [Enter] and then [TAB].\n")
+pyautogui.alert("Switch the in-game chat to Team Chat by pressing [Enter] and then [TAB].")
 
-###################################
+print(f"Open a Code Lock in-game and press [{hotkey}] to automatically enter the code!")
+pyautogui.alert(f"Open a Code Lock in-game and press [{hotkey}] to automatically enter the code!")
 
-####################################################################################################
-# Main Programm
+# Main Program
+Caps_Lock_off()  # Ensure Caps Lock is turned off
+start_time = time.time() + 1
+attempt_count = 1
 
-Caps_Lock_off()
-
-start_time_Z = time.time()+1
-
-Z = 1
 while True:
-
     if keyboard.is_pressed(hotkey):
         Caps_Lock_off()
 
-        Rust = that_window_pos("Rust")
-        if Rust == False:
+        rust_window = that_window_pos("Rust")
+        if not rust_window:
             continue
-        else:
 
-            try:
-                Pin = next_code(Raid_Rest_CodeList_dir)
-                Caps_Lock_off()
-            except:
-                break
-
-            with open(Raid_Rest_CodeList_dir) as myfile:
-                total_lines = sum(1 for line in myfile)
-                Z = Z + 1
-                current_time_Z = time.time()
-                # berechung Zeit
-                elapsed_time_Z = ((current_time_Z - start_time_Z)/60)
-                Restlänge = Code_Listen_länge-total_lines
-                Prozent = (100/Code_Listen_länge)*Restlänge
-                Prozent = round(Prozent, 2)
-
-                Pin_pro_min = (Z/elapsed_time_Z)
-                Time_for_10k = round((((1/Pin_pro_min)*total_lines))/60, 2)
-                Pin_pro_min = round(Pin_pro_min, 3)
+        try:
+            pin_code = next_code(raid_code_list_path)
             Caps_Lock_off()
-            Chat_Text = ">>" + str(Pin) + "<< | [" + str(Code_Listen_länge-1 - total_lines) + "/" + str(Code_Listen_länge-1) + "]Pins | [" + str(
-                Pin_pro_min) + "]Pin/min | Zeit bis 100% : ["+str(Time_for_10k) + "]h | Fortschritt : [" + str(Prozent)+"/100]%"
-            print("\n"+Chat_Text)
-            Eingabe(Pin)
-            # time.sleep(0.7)
-            Chat(Chat_Text)
-            Fill_Text_datei(Raid_log_dir, Chat_Text+"\n", "a")
+        except Exception:
+            break
+
+        with open(raid_code_list_path) as code_file:
+            total_lines = sum(1 for _ in code_file)
+            attempt_count += 1
+            elapsed_time = (time.time() - start_time) / 60  # Time in minutes
+            remaining_codes = code_list_length - total_lines
+            completion_percentage = round((100 / code_list_length) * remaining_codes, 2)
+
+            pins_per_minute = round(attempt_count / elapsed_time, 3)
+            time_to_complete = round(((1 / pins_per_minute) * total_lines) / 60, 2)
+
+        Caps_Lock_off()
+
+        # Prepare and send chat message
+        chat_text = (
+            f">>{pin_code}<< | [{code_list_length - 1 - total_lines}/{code_list_length - 1}] Pins | "
+            f"[{pins_per_minute}] Pins/min | Time until 100%: [{time_to_complete}]h | "
+            f"Progress: [{completion_percentage}/100]%"
+        )
+        print(f"\n{chat_text}")
+        Eingabe(pin_code)
+        Chat(chat_text)
+        Fill_Text_datei(raid_log_path, f"{chat_text}\n", "a")
 
         time.sleep(0.5)
-
-        time.sleep(0.05)
     time.sleep(0.01)
 
-print("Es wurden alle Pins Eingegeben")
-pyautogui.alert("Es wurden alle Pins Eingegeben")
+print("All pins have been entered.")
+pyautogui.alert("All pins have been entered.")

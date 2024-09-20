@@ -364,22 +364,27 @@ def List_to_Text(List):
 def Raid_cheack(Raid_List, Raid_List_Text):
     if Raid_List[1] == False:
         #Raid_Name = input("Wie soll dein Raid heißen: \n>>> ")
-        Raid_Name = pyautogui.prompt(text='Wie soll dein Raid heißen?', title='Neuen Raid Erstellen' , default='CodeLock-Raid-1')
+        Raid_Name = pyautogui.prompt(text='What should your raid be called?', title='Create New Raid', default='CodeLock-Raid-1')
     
     else:
         #Raid_Name = input("Gebe gespeicherten Code Lock Raid Namen ein oder einen Namen für einen Neuen Code-Lock Raid: \n >>> " )
-        Raid_Name = pyautogui.prompt(text="""Öffne einen Vorhandenen Raid oder erstelle einen neuen.
-        
-        Es wurden folgende gespeicherten CodeLock Raids gefunden:\n\n """+ str(Raid_List_Text), title='Raid Öffnen' , default='CodeLock-Raid-1')
+        Raid_Name = pyautogui.prompt(
+    text="""Open an existing raid or create a new one.
+    
+    The following saved CodeLock raids were found:\n\n """ + str(Raid_List_Text),
+    title='Open Raid',
+    default='CodeLock-Raid-1'
+)
 
     print("Es wurde Folgender Raid geöffnet/erstellt: >>> [" +str(Raid_Name)+"] <<<\n")
     if Raid_Name in Raid_List[0]:
         return Raid_Name, 0, 10000, False
     else:
-        Code_Start = int(pyautogui.prompt(text='Code Raid Start an Stelle: (1-10000)', title='Code Start Position' , default='1'))
-        print("Code Liste startet an Stelle: " + str(Code_Start))
+        Code_Start = int(pyautogui.prompt(text='Start the raid code at position: (1-10000)', title='Code Start Position', default='1'))
+        print("Code list starts at position: " + str(Code_Start))
         Code_Ende = int(pyautogui.prompt(text='Code Raid Ende an Stelle: (2-10000)', title='Code Start Position' , default='10000'))
-        print("Code Liste endet an Stelle: " + str(Code_Ende))
+        print("Code list ends at position: " + str(Code_Ende))
+
         x_Raid_Folder = Folder_gen( Raid_Name, "Documents/Rust - Key-Bot/Raid-List" )   # Main Folder erstellen
         return Raid_Name, Code_Start, Code_Ende, True
 
@@ -413,8 +418,8 @@ def Code_List(Code_Start, Code_Ende, Full_Code_List_dir, Raid_Rest_CodeList_dir)
         x = x - 1
         prozent = round(100-((100/data_len)*x), 2)
         if x == 0:
-            print(
-                "\nDie CodeLock Liste wurde erstellt >>> ["+str(Raid_Rest_CodeList_dir) + "] <<<\n")
+            print("\nThe CodeLock list has been created >>> [" + str(Raid_Rest_CodeList_dir) + "] <<<\n")
+
             break
         Item = data.pop()
         print(str(prozent) + "% - [" + str(Item[0:4])+"]")
@@ -443,11 +448,13 @@ def that_window_pos(window_name):
             window_rect = GetWindowRect(window_handle)
             break
         except:
-            print(" Das Fenster >>> "+str(window_name) +
-                  " <<< konnte nicht gefunden werden")
+            print(" The window >>> " + str(window_name) + " <<< could not be found")
+
             window_rect = False
-            print("Der HOTKEY Funktioniert nur im Game Rust.")
-            pyautogui.alert("Der HOTKEY Funktioniert nur im Game Rust.")
+            print("The HOTKEY only works in the game Rust.")
+
+            pyautogui.alert("The HOTKEY only works in the game Rust.")
+
             break
 
     #print("Das Fenster >> "+ str(window_name) + "<<< ist auf pos > "+ str(window_rect))
@@ -466,7 +473,7 @@ def next_code(Code_path):
 #    for Next_Code in list(Datei)[::-1]:
 #        break
     Next_Code = Next_Code[0:4]
-    print("Aktueller Pin >>>["+str(Next_Code)+"]<<<\n")
+    print("Current Pin >>>[" + str(Next_Code) + "]<<<\n")
 
     readFile = open(Code_path)
     lines = readFile.readlines()

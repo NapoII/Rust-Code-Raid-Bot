@@ -3,27 +3,27 @@
 <p align="center">
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/github/repo-size/NapoII/Rust-Code-Raid-Bot" alt="github/repo-size">
+    <img src="https://img.shields.io/github/repo-size/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/repo-size">
 </a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/NapoII/Rust-Code-Raid-Bot" alt="github/license">
+    <img src="https://img.shields.io/github/license/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/license">
 </a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/actions">
-    <img src="https://img.shields.io/github/last-commit/NapoII/Rust-Code-Raid-Bot" alt="github/last-commit">
+    <img src="https://img.shields.io/github/last-commit/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/last-commit">
 </a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/issues">
-    <img src="https://img.shields.io/github/issues/NapoII/Rust-Code-Raid-Bot?style=plastic" alt="github/issues">
+    <img src="https://img.shields.io/github/issues/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/issues">
 </a>
 
 <a href="https://github.com/NapoII/Rust-Code-Raid-Bot/stargazers">
-    <img src="https://img.shields.io/github/stars/NapoII/Rust-Code-Raid-Bot?style=social" alt="github/stars">
+    <img src="https://img.shields.io/github/stars/NapoII/Rust-Code-Raid-Bot?style=for-the-badge" alt="github/stars">
 </a>
 
 <a href="https://discord.gg/g7EW4P65">
-    <img src="https://img.shields.io/discord/190307701169979393?style=plastic" alt="discord">
+    <img src="https://img.shields.io/discord/190307701169979393?style=for-the-badge" alt="discord">
 </a>
 </p>
 
