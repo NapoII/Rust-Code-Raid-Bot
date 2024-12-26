@@ -2,3 +2,4 @@ logNow
 configparser
 keyboard
 pyautogui
+pywin32
