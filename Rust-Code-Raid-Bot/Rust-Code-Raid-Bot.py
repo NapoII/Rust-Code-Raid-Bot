@@ -1,11 +1,3 @@
-"""
-Full Documentation available at: https://github.com/NapoII/Rust-Code-Raid-Bot
-------------------------------------------------------
-!!! ADD NECESSARY INFORMATION HERE !!!
-------------------------------------------------------
-"""
-
-# Imports
 import os
 import sys
 import time
@@ -19,6 +11,20 @@ file_path = os.path.normpath(os.path.dirname(sys.argv[0]))
 config_dir = os.path.join(file_path, "cfg", "config.ini")
 config_dir = new_path(config_dir)
 BSP_config = read_config(config_dir, "Test", "abc")
+
+# Adjust the code list logic for any number of players
+def get_code_list_from_file(file_path, player_num, total_players):
+    """
+    Generate a filtered code list for a specific player in a multi-player mode from the main file, reversed to start from top to bottom.
+
+    :param file_path: Path to the full code list file
+    :param player_num: Current player's index (1-based)
+    :param total_players: Total number of players
+    :return: List of codes for the player
+    """
+    with open(file_path, 'r') as file:
+        full_code_list = [line.strip() for line in file.readlines()][::-1]  # Reverse the list
+    return [code for index, code in enumerate(full_code_list) if index % total_players == (player_num - 1)]
 
 # Main Script
 # Rust-Code-Raid-Bot.py
@@ -48,7 +54,7 @@ code_list_length = (code_end + 1) - code_start
 if is_new_raid:
     date_time = time.strftime("%d_%m-%Y-%H:%M")
     raid_log_path = Create_File(f"{raid_name}.txt", raid_folder, " Raid Log:\n")
-    
+
     log_intro = (
         f"\nThe CodeLock Raid [{raid_name}] was created on {date_time}.\n"
         f"{code_list_length} out of 10,000 possible codes will be checked.\n"
@@ -56,13 +62,61 @@ if is_new_raid:
         "############################################################\n\n"
         "Entered codes (use CTRL + F to search for a code):\n\n"
     )
-    
+
     Fill_Text_datei(raid_log_path, log_intro, "a")
-    
-    raid_code_list_path = Create_File("Code_List.txt", raid_folder, "")
-    Code_List(code_start, code_end, full_code_list_path, raid_code_list_path)
+
+# Ask if the player is solo or with others
+player_mode = pyautogui.prompt(
+    text="Are you playing solo or with others? Enter '1' for solo, or the number of players (e.g., 3 for three players):",
+    title="Player Mode Selection",
+    default='1'
+)
+
+# Validate input
+try:
+    player_count = int(player_mode)
+    if player_count < 1:
+        raise ValueError("Player count must be at least 1.")
+except ValueError as e:
+    pyautogui.alert(f"Invalid input: {e}")
+    sys.exit(1)
+
+# Adjust code entry logic based on player count
+if player_count == 1:
+    pyautogui.alert("Solo mode selected. The bot will try all codes sequentially.")
 else:
-    raid_log_path = new_path(raid_folder, f"{raid_name}.txt")
+    pyautogui.alert(f"{player_count} players selected. The bot will alternate codes for each player.")
+
+# Generate the code list for the current player
+if player_count > 1:
+    # Ask which player is running the bot
+    player_index = pyautogui.prompt(
+        text=f"Which player are you? Enter your player number (1 to {player_count}):",
+        title="Player Number Selection",
+        default='1'
+    )
+    try:
+        player_index = int(player_index)
+        if not (1 <= player_index <= player_count):
+            raise ValueError("Player number out of range.")
+    except ValueError as e:
+        pyautogui.alert(f"Invalid input: {e}")
+        sys.exit(1)
+
+    # Create the filtered code list for the current player
+    raid_code_list_path = Create_File(f"Code_List_Player_{player_index}.txt", raid_folder, "")
+    player_code_list = get_code_list_from_file(full_code_list_path, player_index, player_count)
+
+    # Save the filtered list to the player's file
+    with open(raid_code_list_path, 'w') as file:
+        for code in player_code_list:
+            file.write(f"{code}\n")
+else:
+    # Solo mode: all codes are used
+    raid_code_list_path = Create_File("Code_List.txt", raid_folder, "")
+    with open(full_code_list_path, 'r') as full_file:
+        with open(raid_code_list_path, 'w') as new_file:
+            new_file.write(full_file.read())
 
 # Set Hotkey
 hotkey = pyautogui.prompt(
