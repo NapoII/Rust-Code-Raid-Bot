@@ -90,9 +90,23 @@ Happy gaming! 🎮✨
 
 Feel free to show your appreciation by treating me to a virtual coffee. Your support means a lot and keeps the creative coding vibes going! 🚀
 
-<div style="text-align:center;">
-    <a href="https://ko-fi.com/napo_ii"><img src="README_img/kofi.gif" alt="Buy me a coffee" width="200" height="auto"></a>
-</div>
+<table style="width:100%; text-align:center; border-collapse:collapse; border:none;">
+    <tr>
+        <td style="padding:10px; border:none;">
+            <p style="font-size:16px; font-weight:bold; margin:0;">Support Napo_II:</p>
+            <a href="https://ko-fi.com/napo_ii">
+                <img src="README_img/kofi.gif" alt="Buy me a coffee for Napo_II" width="200" height="auto">
+            </a>
+        </td>
+        <td style="padding:10px; border:none;">
+            <p style="font-size:16px; font-weight:bold; margin:0;">Support Vozdeouro:</p>
+            <a href="https://ko-fi.com/vozdeouro">
+                <img src="README_img/kofi.gif" alt="Buy me a coffee for Vozdeouro" width="200" height="auto">
+            </a>
+        </td>
+    </tr>
+</table>
+
 
 ## 📚 LICENSE <a name = "LICENSE"></a>
 
